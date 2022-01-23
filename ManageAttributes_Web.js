@@ -15,6 +15,7 @@ ManageAttributes.initializeUI = function()
     // when Match Photo mode is inactive
     let contentContainer = document.createElement('div');
     contentContainer.id = ManageAttributes.contentContainerID;
+    contentContainer.className = 'contentContainer';
     window.document.body.appendChild(contentContainer);
 
     // create the overall header for the inactive mode
