@@ -1,0 +1,11 @@
+{
+    "PluginName": "Manage Attributes",
+    "PluginDescription": "View, edit, and create string attributes attached to the editing history and selected object.",
+    "PluginType": "Panel",
+    "Scripts": [ 
+        "PLUGINLOCATION/ManageAttributes_Client.js",
+        "https://formit3d.github.io/SharedPluginUtilities/FormItPluginUtils.js"
+     ],
+    "Panel": "PLUGINLOCATION/index.html",
+    "PanelIcon": "PLUGINLOCATION/img/match_photo@2x.png"
+}

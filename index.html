@@ -1,0 +1,39 @@
+<html>
+<head>
+    <!-- for testing shared files locally, use: ../../SharedPluginUtilities/ -->
+    <title>Manage Cameras</title>
+    <META NAME="Title" CONTENT="Manage Attributes">
+    <META NAME="Author" CONTENT="Autodesk FormIt">
+    <!-- interface with FormIt -->
+    <script type="text/javascript" src="https://formit3d.github.io/SharedPluginUtilities/v23_0/FormItInterface.js"></script>
+    <!-- UI and styling -->
+    <script type="text/javascript" src="https://formit3d.github.io/SharedPluginUtilities/FormItPluginUI.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://formit3d.github.io/SharedPluginUtilities/FormItPluginStyling.css">
+    <!-- plugin scripts -->
+    <script type="text/javascript" src="ManageAttributes_Web.js"></script>
+    <script type="text/javascript">
+        FormItInterface.Initialize(function () {
+
+            // initialize the UI
+            // this must be called from here, to ensure the HTML page is loaded
+            // before scripts try to access the window document
+            ManageAttributes.initializeUI();
+
+            // on new sketch, update the UI to capture units and photo objects
+            FormItInterface.SubscribeMessage("FormIt.Message.kNewModelRequested", function(msg)
+            {
+                ManageAttributes.updateUI();
+            });
+
+            // on open file, update the UI to capture units and photo objects
+            FormItInterface.SubscribeMessage("FormIt.Message.kLoadComplete", function(msg)
+            {
+                ManageAttributes.updateUI();
+            });
+
+        }); // DOMContentLoaded
+    </script>
+</head>
+<body> 
+</body>
+</html>
