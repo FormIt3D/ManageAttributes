@@ -4,7 +4,8 @@
     "PluginType": "Panel",
     "Scripts": [ 
         "PLUGINLOCATION/ManageAttributes_Client.js",
-        "https://formit3d.github.io/SharedPluginUtilities/FormItPluginUtils.js"
+        "https://formit3d.github.io/SharedPluginUtilities/FormItPluginUtils.js",
+        "https://formit3d.github.io/PropertiesPlus/PropertiesPlus_Client.js"
      ],
     "Panel": "PLUGINLOCATION/index.html",
     "PanelIcon": "PLUGINLOCATION/img/match_photo@2x.png"

@@ -19,6 +19,13 @@
             // this must be called from here, to ensure the HTML page is loaded
             // before scripts try to access the window document
             ManageAttributes.initializeUI();
+            ManageAttributes.updateUI();
+
+            FormItInterface.SubscribeMessage("FormIt.Message.kSelectionsChanged", function(msg)
+            {
+                // when the FormIt selection changes, automatically update the plugin UI
+                ManageAttributes.updateUI();
+            });
 
             // on new sketch, update the UI to capture units and photo objects
             FormItInterface.SubscribeMessage("FormIt.Message.kNewModelRequested", function(msg)

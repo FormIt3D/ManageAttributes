@@ -2,24 +2,20 @@ window.ManageAttributes = window.ManageAttributes || {};
 
 /*** web/UI code - runs natively in the plugin process ***/
 
+// elements that get updated on selection and context change
+ManageAttributes.editingContextInfoCard = undefined;
+
 // initialize the UI
 ManageAttributes.initializeUI = function()
 {
-    // clear the existing content if it exists
-    if (document.getElementById('contentContainer'))
-    {
-        document.getElementById('contentContainer').parentElement.removeChild(document.getElementById('contentContainer'));
-    }
-
     // create a container for all UI elements that should show
-    // when Match Photo mode is inactive
     let contentContainer = document.createElement('div');
     contentContainer.id = ManageAttributes.contentContainerID;
     contentContainer.className = 'contentContainer';
     window.document.body.appendChild(contentContainer);
 
-    // create the overall header for the inactive mode
-    let headerContainer = new FormIt.PluginUI.HeaderModule('Manage Attributes', 'View, edit, and delete string attributes in the current context and on the selected object.', 'headerContainer');
+    // create the overall header
+    let headerContainer = new FormIt.PluginUI.HeaderModule('Manage Attributes', 'View, modify, and add string attributes to the current history or the selected object.', 'headerContainer');
     contentContainer.appendChild(headerContainer.element);
 
     // separator and space
@@ -27,15 +23,19 @@ ManageAttributes.initializeUI = function()
     contentContainer.appendChild(document.createElement('p'));
 
     // editing context section
-    let currentHistoryAttributesHeader = new FormIt.PluginUI.HeaderModule('Editing Context', 'Manage string attributes attached to the current editing history.', 'headerContainer');
+    let currentHistoryAttributesHeader = new FormIt.PluginUI.HeaderModule('In Current History', '', 'headerContainer');
     contentContainer.appendChild(currentHistoryAttributesHeader.element);
+
+    // context properties info card
+    ManageAttributes.editingContextInfoCard = new FormIt.PluginUI.EditingContextInfoCard();
+    contentContainer.appendChild(ManageAttributes.editingContextInfoCard.element);
 
     // separator and space
     contentContainer.appendChild(document.createElement('hr'));
     contentContainer.appendChild(document.createElement('p'));
 
     // selected object section
-    let selectedObjectAttributesHeader = new FormIt.PluginUI.HeaderModule('Selected Object', 'Manage string attributes attached to the selected object.', 'headerContainer');
+    let selectedObjectAttributesHeader = new FormIt.PluginUI.HeaderModule('On Selected Object', '', 'headerContainer');
     contentContainer.appendChild(selectedObjectAttributesHeader.element);
 
     // create the footer
@@ -45,5 +45,13 @@ ManageAttributes.initializeUI = function()
 // update the UI
 ManageAttributes.updateUI = function()
 {
-    
+    // get selection info from Properties Plus
+    window.FormItInterface.CallMethod("PropertiesPlus.getSelectionInfo", { }, function(result)
+    {
+        let currentSelectionInfo = JSON.parse(result);
+
+        ManageAttributes.editingContextInfoCard.update(currentSelectionInfo);
+    });
+
+
 }
