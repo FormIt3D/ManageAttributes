@@ -21,7 +21,7 @@ ManageAttributes.initializeUI = function()
 {
     // create a container for all UI elements that should show
     let contentContainer = document.createElement('div');
-    contentContainer.id = ManageAttributes.contentContainerID;
+    contentContainer.id = 'contentContainer';
     contentContainer.className = 'contentContainer';
     window.document.body.appendChild(contentContainer);
 
