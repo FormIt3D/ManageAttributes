@@ -7,13 +7,13 @@ ManageAttributes.nMaxObjectCount = 1000;
 
 // elements that get updated on selection and context change
 ManageAttributes.editingHistoryInfoCard = undefined;
-ManageAttributes.editingHistoryExistingAttributesCard = undefined;
-ManageAttributes.editingHistoryNewAttributesCard = undefined;
+ManageAttributes.existingAttributesOnHistoryCard = undefined;
+ManageAttributes.newAttributeOnHistoryCard = undefined;
 ManageAttributes.notInEditingContextMessageCard = undefined;
 
 ManageAttributes.selectionCountInfoCard = undefined;
-ManageAttributes.selectionExistingAttributesCard = undefined;
-ManageAttributes.selectionNewAttributesCard = undefined;
+ManageAttributes.existingAttributesOnSelectionCard = undefined;
+ManageAttributes.newAttributeOnSelectionCard = undefined;
 ManageAttributes.incompatibleSelectionMessageCard = undefined;
 
 // initialize the UI
@@ -45,12 +45,12 @@ ManageAttributes.initializeUI = function()
     ManageAttributes.notInEditingContextMessageCard.hide();
 
     // existing attributes on this history
-    ManageAttributes.editingHistoryExistingAttributesCard = new FormIt.PluginUI.StringAttributeListViewOnly('History Attributes', false, 200);
-    contentContainer.appendChild(ManageAttributes.editingHistoryExistingAttributesCard.element);
+    ManageAttributes.existingAttributesOnHistoryCard = new FormIt.PluginUI.StringAttributeListViewOnly('History Attributes', false, 200);
+    contentContainer.appendChild(ManageAttributes.existingAttributesOnHistoryCard.element);
 
     // create new attributes on this history
-    ManageAttributes.editingHistoryNewAttributesCard = new FormIt.PluginUI.NewStringAttributeInfoCard('Add New Attributes', false, 200);
-    contentContainer.appendChild(ManageAttributes.editingHistoryNewAttributesCard.element);
+    ManageAttributes.newAttributeOnHistoryCard = new FormIt.PluginUI.NewStringAttributeInfoCard('Add New Attributes', false, 200);
+    contentContainer.appendChild(ManageAttributes.newAttributeOnHistoryCard.element);
 
     /*** on selected object ***/
 
@@ -70,12 +70,16 @@ ManageAttributes.initializeUI = function()
     ManageAttributes.incompatibleSelectionMessageCard.hide();
 
     // existing attributes on this object
-    ManageAttributes.selectionExistingAttributesCard = new FormIt.PluginUI.StringAttributeListViewOnly('Object Attributes', true, 200);
-    contentContainer.appendChild(ManageAttributes.selectionExistingAttributesCard.element);
+    ManageAttributes.existingAttributesOnSelectionCard = new FormIt.PluginUI.StringAttributeListViewOnly('Object Attributes', true, 200);
+    contentContainer.appendChild(ManageAttributes.existingAttributesOnSelectionCard.element);
 
     // create new attributes on this history
-    ManageAttributes.selectionNewAttributesCard = new FormIt.PluginUI.NewStringAttributeInfoCard('Add New Attributes', true, 200);
-    contentContainer.appendChild(ManageAttributes.selectionNewAttributesCard.element);
+    ManageAttributes.newAttributeOnSelectionCard = new FormIt.PluginUI.NewStringAttributeInfoCard('Add New Attributes', true, 200);
+    contentContainer.appendChild(ManageAttributes.newAttributeOnSelectionCard.element);
+    ManageAttributes.newAttributeOnSelectionCard.submitNewStringAttribute.button.addEventListener('click', function()
+    {
+        ManageAttributes.newAttributeOnSelectionCard.submitStringAttributeOnObject(ManageAttributes.existingAttributesOnSelectionCard);
+    });
 
     // create the footer
     document.body.appendChild(new FormIt.PluginUI.FooterModule().element);
@@ -94,8 +98,8 @@ ManageAttributes.updateUI = function()
         ManageAttributes.selectionCountInfoCard.update(currentSelectionInfo);
 
         // update the lists of existing attributes
-        ManageAttributes.selectionExistingAttributesCard.update(currentSelectionInfo.aSelectedObjectStringAttributes);
-        ManageAttributes.editingHistoryExistingAttributesCard.update(currentSelectionInfo.aEditingHistoryStringAttributes);
+        ManageAttributes.existingAttributesOnSelectionCard.update(currentSelectionInfo.aSelectedObjectStringAttributes);
+        ManageAttributes.existingAttributesOnHistoryCard.update(currentSelectionInfo.aEditingHistoryStringAttributes);
 
         // manage card visibility for the editing history section
 
@@ -103,14 +107,14 @@ ManageAttributes.updateUI = function()
         if (currentSelectionInfo.nEditingHistoryID == 0)
         {
             ManageAttributes.notInEditingContextMessageCard.show();
-            ManageAttributes.editingHistoryExistingAttributesCard.hide();
-            ManageAttributes.editingHistoryNewAttributesCard.hide();
+            ManageAttributes.existingAttributesOnHistoryCard.hide();
+            ManageAttributes.newAttributeOnHistoryCard.hide();
         }
         else
         {
             ManageAttributes.notInEditingContextMessageCard.hide();
-            ManageAttributes.editingHistoryExistingAttributesCard.show();
-            ManageAttributes.editingHistoryNewAttributesCard.show();
+            ManageAttributes.existingAttributesOnHistoryCard.show();
+            ManageAttributes.newAttributeOnHistoryCard.show();
         }
 
         // manage card visibility for the selected object section
@@ -119,14 +123,14 @@ ManageAttributes.updateUI = function()
         if (currentSelectionInfo.nSelectedTotalCount == 1)
         {
             ManageAttributes.incompatibleSelectionMessageCard.hide();
-            ManageAttributes.selectionExistingAttributesCard.show();
-            ManageAttributes.selectionNewAttributesCard.show();
+            ManageAttributes.existingAttributesOnSelectionCard.show();
+            ManageAttributes.newAttributeOnSelectionCard.show();
         }
         else 
         {
             ManageAttributes.incompatibleSelectionMessageCard.show();
-            ManageAttributes.selectionExistingAttributesCard.hide();
-            ManageAttributes.selectionNewAttributesCard.hide();
+            ManageAttributes.existingAttributesOnSelectionCard.hide();
+            ManageAttributes.newAttributeOnSelectionCard.hide();
         }
     });
 
