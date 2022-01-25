@@ -40,7 +40,7 @@ ManageAttributes.initializeUI = function()
     contentContainer.appendChild(ManageAttributes.editingHistoryInfoCard.element);
 
     // message when no group is being edited - attributes can't be added here
-    ManageAttributes.notInEditingContextMessageCard = new FormIt.PluginUI.MessageInfoCard('Edit a group to view its history attributes.');
+    ManageAttributes.notInEditingContextMessageCard = new FormIt.PluginUI.MessageInfoCard('Edit a group to manage its history attributes.');
     contentContainer.appendChild(ManageAttributes.notInEditingContextMessageCard.element);
     ManageAttributes.notInEditingContextMessageCard.hide();
 
@@ -49,7 +49,7 @@ ManageAttributes.initializeUI = function()
     contentContainer.appendChild(ManageAttributes.existingAttributesOnHistoryCard.element);
 
     // create new attributes on this history
-    ManageAttributes.newAttributeOnHistoryCard = new FormIt.PluginUI.NewStringAttributeInfoCard('Add New Attributes', false, 200);
+    ManageAttributes.newAttributeOnHistoryCard = new FormIt.PluginUI.NewStringAttributeInfoCard('Add New Attribute', false, 200);
     contentContainer.appendChild(ManageAttributes.newAttributeOnHistoryCard.element);
 
     /*** on selected object ***/
@@ -65,7 +65,7 @@ ManageAttributes.initializeUI = function()
     ManageAttributes.selectionCountInfoCard.appendTooManyObjectsMessage();
 
     // message when the selection doesn't contain a single object
-    ManageAttributes.incompatibleSelectionMessageCard = new FormIt.PluginUI.MessageInfoCard('Select a single object to view its attributes.');
+    ManageAttributes.incompatibleSelectionMessageCard = new FormIt.PluginUI.MessageInfoCard('Select a single object to manage its attributes.');
     contentContainer.appendChild(ManageAttributes.incompatibleSelectionMessageCard.element);
     ManageAttributes.incompatibleSelectionMessageCard.hide();
 
@@ -74,7 +74,7 @@ ManageAttributes.initializeUI = function()
     contentContainer.appendChild(ManageAttributes.existingAttributesOnSelectionCard.element);
 
     // create new attributes on this history
-    ManageAttributes.newAttributeOnSelectionCard = new FormIt.PluginUI.NewStringAttributeInfoCard('Add New Attributes', true, 200);
+    ManageAttributes.newAttributeOnSelectionCard = new FormIt.PluginUI.NewStringAttributeInfoCard('Add New Attribute', true, 200);
     contentContainer.appendChild(ManageAttributes.newAttributeOnSelectionCard.element);
     ManageAttributes.newAttributeOnSelectionCard.submitNewStringAttribute.button.addEventListener('click', function()
     {
