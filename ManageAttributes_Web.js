@@ -95,8 +95,7 @@ ManageAttributes.updateUI = function()
 
         // update the lists of existing attributes
         ManageAttributes.selectionExistingAttributesCard.update(currentSelectionInfo.aSelectedObjectStringAttributes);
-        //ManageAttributes.editingHistoryExistingAttributesCard.update(currentSelectionInfo.aSelectedObjectAttributes[0]);
-        //ManageAttributes.selectionExistingAttributesCard.update(currentSelectionInfo.aSelectedObjectAttributes[0]);
+        ManageAttributes.editingHistoryExistingAttributesCard.update(currentSelectionInfo.aEditingHistoryStringAttributes);
 
         // manage card visibility for the editing history section
 
