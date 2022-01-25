@@ -49,7 +49,7 @@ ManageAttributes.initializeUI = function()
     contentContainer.appendChild(ManageAttributes.editingHistoryExistingAttributesCard.element);
 
     // create new attributes on this history
-    ManageAttributes.editingHistoryNewAttributesCard = new FormIt.PluginUI.StringAttributeListViewOnly('Add New Attributes', false, 200);
+    ManageAttributes.editingHistoryNewAttributesCard = new FormIt.PluginUI.NewStringAttributeInfoCard('Add New Attributes', false, 200);
     contentContainer.appendChild(ManageAttributes.editingHistoryNewAttributesCard.element);
 
     /*** on selected object ***/
@@ -74,7 +74,7 @@ ManageAttributes.initializeUI = function()
     contentContainer.appendChild(ManageAttributes.selectionExistingAttributesCard.element);
 
     // create new attributes on this history
-    ManageAttributes.selectionNewAttributesCard = new FormIt.PluginUI.StringAttributeListViewOnly('Add New Attributes', true, 200);
+    ManageAttributes.selectionNewAttributesCard = new FormIt.PluginUI.NewStringAttributeInfoCard('Add New Attributes', true, 200);
     contentContainer.appendChild(ManageAttributes.selectionNewAttributesCard.element);
 
     // create the footer
@@ -110,7 +110,7 @@ ManageAttributes.updateUI = function()
         {
             ManageAttributes.notInEditingContextMessageCard.hide();
             ManageAttributes.editingHistoryExistingAttributesCard.show();
-            ManageAttributes.editingHistoryNewAttributesCard.show()
+            ManageAttributes.editingHistoryNewAttributesCard.show();
         }
 
         // manage card visibility for the selected object section
@@ -120,7 +120,7 @@ ManageAttributes.updateUI = function()
         {
             ManageAttributes.incompatibleSelectionMessageCard.hide();
             ManageAttributes.selectionExistingAttributesCard.show();
-            ManageAttributes.selectionNewAttributesCard.show()
+            ManageAttributes.selectionNewAttributesCard.show();
         }
         else 
         {
