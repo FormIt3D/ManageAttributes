@@ -45,11 +45,11 @@ ManageAttributes.initializeUI = function()
     ManageAttributes.notInEditingContextMessageCard.hide();
 
     // existing attributes on this history
-    ManageAttributes.editingHistoryExistingAttributesCard = new FormIt.PluginUI.InfoCardExpandable('Existing Attributes', false);
+    ManageAttributes.editingHistoryExistingAttributesCard = new FormIt.PluginUI.StringAttributeListViewOnly('History Attributes', false, 200);
     contentContainer.appendChild(ManageAttributes.editingHistoryExistingAttributesCard.element);
 
     // create new attributes on this history
-    ManageAttributes.editingHistoryNewAttributesCard = new FormIt.PluginUI.InfoCardExpandable('Add New Attributes', false);
+    ManageAttributes.editingHistoryNewAttributesCard = new FormIt.PluginUI.StringAttributeListViewOnly('Add New Attributes', false, 200);
     contentContainer.appendChild(ManageAttributes.editingHistoryNewAttributesCard.element);
 
     /*** on selected object ***/
@@ -64,17 +64,17 @@ ManageAttributes.initializeUI = function()
     // append the too many objects div now that it has a parent
     ManageAttributes.selectionCountInfoCard.appendTooManyObjectsMessage();
 
-    // message when the selection doesn't contain a single group instance
-    ManageAttributes.incompatibleSelectionMessageCard = new FormIt.PluginUI.MessageInfoCard('Select a single group instance to view its attributes.');
+    // message when the selection doesn't contain a single object
+    ManageAttributes.incompatibleSelectionMessageCard = new FormIt.PluginUI.MessageInfoCard('Select a single object to view its attributes.');
     contentContainer.appendChild(ManageAttributes.incompatibleSelectionMessageCard.element);
     ManageAttributes.incompatibleSelectionMessageCard.hide();
 
     // existing attributes on this object
-    ManageAttributes.selectionExistingAttributesCard = new FormIt.PluginUI.InfoCardExpandable('Existing Attributes', false);
+    ManageAttributes.selectionExistingAttributesCard = new FormIt.PluginUI.StringAttributeListViewOnly('Object Attributes', true, 200);
     contentContainer.appendChild(ManageAttributes.selectionExistingAttributesCard.element);
 
     // create new attributes on this history
-    ManageAttributes.selectionNewAttributesCard = new FormIt.PluginUI.InfoCardExpandable('Add New Attributes', false);
+    ManageAttributes.selectionNewAttributesCard = new FormIt.PluginUI.StringAttributeListViewOnly('Add New Attributes', true, 200);
     contentContainer.appendChild(ManageAttributes.selectionNewAttributesCard.element);
 
     // create the footer
@@ -93,25 +93,42 @@ ManageAttributes.updateUI = function()
         ManageAttributes.editingHistoryInfoCard.update(currentSelectionInfo);
         ManageAttributes.selectionCountInfoCard.update(currentSelectionInfo);
 
-        // show or hide cards based on the selection
+        // update the lists of existing attributes
+        ManageAttributes.selectionExistingAttributesCard.update(currentSelectionInfo.aSelectedObjectStringAttributes);
+        //ManageAttributes.editingHistoryExistingAttributesCard.update(currentSelectionInfo.aSelectedObjectAttributes[0]);
+        //ManageAttributes.selectionExistingAttributesCard.update(currentSelectionInfo.aSelectedObjectAttributes[0]);
 
-        // message: not in editing context
-        currentSelectionInfo.nEditingHistoryID == 0 ? ManageAttributes.notInEditingContextMessageCard.show() : ManageAttributes.notInEditingContextMessageCard.hide();
+        // manage card visibility for the editing history section
 
-        // existing attributes on history
-        currentSelectionInfo.nEditingHistoryID == 0 ? ManageAttributes.editingHistoryExistingAttributesCard.hide() : ManageAttributes.editingHistoryExistingAttributesCard.show();
+        // history attributes shouldn't be applied to the Main History (0)
+        if (currentSelectionInfo.nEditingHistoryID == 0)
+        {
+            ManageAttributes.notInEditingContextMessageCard.show();
+            ManageAttributes.editingHistoryExistingAttributesCard.hide();
+            ManageAttributes.editingHistoryNewAttributesCard.hide();
+        }
+        else
+        {
+            ManageAttributes.notInEditingContextMessageCard.hide();
+            ManageAttributes.editingHistoryExistingAttributesCard.show();
+            ManageAttributes.editingHistoryNewAttributesCard.show()
+        }
 
-        // new attributes on history
-        currentSelectionInfo.nEditingHistoryID == 0 ? ManageAttributes.editingHistoryNewAttributesCard.hide() : ManageAttributes.editingHistoryNewAttributesCard.show();
+        // manage card visibility for the selected object section
 
-        // message: incompatible selection
-        currentSelectionInfo.nSelectedTotalCount == 1 && currentSelectionInfo.nSelectedGroupInstanceCount == 1 ? ManageAttributes.incompatibleSelectionMessageCard.hide() : ManageAttributes.incompatibleSelectionMessageCard.show();
-
-        // existing attributes on object
-        currentSelectionInfo.nSelectedTotalCount == 1 && currentSelectionInfo.nSelectedGroupInstanceCount == 1 ? ManageAttributes.selectionExistingAttributesCard.show() : ManageAttributes.selectionExistingAttributesCard.hide();
-
-        // new attributes on object
-        currentSelectionInfo.nSelectedTotalCount == 1 && currentSelectionInfo.nSelectedGroupInstanceCount == 1 ? ManageAttributes.selectionNewAttributesCard.show() : ManageAttributes.selectionNewAttributesCard.hide();
+        // attributes can only be managed on a single item at a time
+        if (currentSelectionInfo.nSelectedTotalCount == 1)
+        {
+            ManageAttributes.incompatibleSelectionMessageCard.hide();
+            ManageAttributes.selectionExistingAttributesCard.show();
+            ManageAttributes.selectionNewAttributesCard.show()
+        }
+        else 
+        {
+            ManageAttributes.incompatibleSelectionMessageCard.show();
+            ManageAttributes.selectionExistingAttributesCard.hide();
+            ManageAttributes.selectionNewAttributesCard.hide();
+        }
     });
 
 
