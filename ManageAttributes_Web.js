@@ -51,6 +51,10 @@ ManageAttributes.initializeUI = function()
     // create new attributes on this history
     ManageAttributes.newAttributeOnHistoryCard = new FormIt.PluginUI.NewStringAttributeInfoCard('Add New Attribute', false, 200);
     contentContainer.appendChild(ManageAttributes.newAttributeOnHistoryCard.element);
+    ManageAttributes.newAttributeOnHistoryCard.submitNewStringAttribute.button.addEventListener('click', function()
+    {
+        ManageAttributes.newAttributeOnHistoryCard.submitStringAttributeOnHistory(ManageAttributes.existingAttributesOnHistoryCard);
+    });
 
     /*** on selected object ***/
 
@@ -73,7 +77,7 @@ ManageAttributes.initializeUI = function()
     ManageAttributes.existingAttributesOnSelectionCard = new FormIt.PluginUI.StringAttributeListViewOnly('Object Attributes', true, 200);
     contentContainer.appendChild(ManageAttributes.existingAttributesOnSelectionCard.element);
 
-    // create new attributes on this history
+    // create new attributes on this object
     ManageAttributes.newAttributeOnSelectionCard = new FormIt.PluginUI.NewStringAttributeInfoCard('Add New Attribute', true, 200);
     contentContainer.appendChild(ManageAttributes.newAttributeOnSelectionCard.element);
     ManageAttributes.newAttributeOnSelectionCard.submitNewStringAttribute.button.addEventListener('click', function()
