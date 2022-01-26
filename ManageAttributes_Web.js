@@ -36,8 +36,8 @@ ManageAttributes.initializeUI = function()
     contentContainer.appendChild(currentHistoryAttributesHeader.element);
 
     // context properties info card
-    //ManageAttributes.editingHistoryInfoCard = new FormIt.PluginUI.EditingContextInfoCard();
-    //contentContainer.appendChild(ManageAttributes.editingHistoryInfoCard.element);
+    ManageAttributes.editingHistoryInfoCard = new FormIt.PluginUI.EditingContextInfoCard();
+    contentContainer.appendChild(ManageAttributes.editingHistoryInfoCard.element);
 
     // message when no group is being edited - attributes can't be added here
     ManageAttributes.notInEditingContextMessageCard = new FormIt.PluginUI.MessageInfoCard('Edit a group to manage its history attributes.');
@@ -94,7 +94,7 @@ ManageAttributes.updateUI = function()
         let currentSelectionInfo = JSON.parse(result);
 
         // update the cards that are always shown
-        //ManageAttributes.editingHistoryInfoCard.update(currentSelectionInfo);
+        ManageAttributes.editingHistoryInfoCard.update(currentSelectionInfo);
         ManageAttributes.selectionCountInfoCard.update(currentSelectionInfo);
 
 
@@ -106,8 +106,9 @@ ManageAttributes.updateUI = function()
         let attributeInfo = JSON.parse(result);
 
         // update the lists of existing attributes
+        ManageAttributes.existingAttributesOnHistoryCard.update(attributeInfo.aEditingHistoryStringAttributes);
         ManageAttributes.existingAttributesOnSelectionCard.update(attributeInfo.aSelectedObjectStringAttributes);
-        ManageAttributes.existingAttributesOnHistoryCard.update(attributeInfo.aSelectedObjectHistoryStringAttributes);
+
 
         // manage card visibility for the editing history section
 
