@@ -1,0 +1,48 @@
+<html>
+<head>
+    <title>Manage Attributes</title>
+    <META NAME="Title" CONTENT="Manage Attributes">
+    <META NAME="Author" CONTENT="Autodesk FormIt">
+
+    <!-- for testing shared files locally, use: ../../SharedPluginUtilities/ -->
+    <!-- interface with FormIt -->
+    <script type="text/javascript" src="https://formit3d.github.io/SharedPluginUtilities/v23_0/FormItInterface.js"></script>
+    <!-- UI and styling -->
+    <script type="text/javascript" src="../../SharedPluginUtilities/FormItPluginUI.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../SharedPluginUtilities/FormItPluginStyling.css">
+    <!-- plugin scripts -->
+    <script type="text/javascript" src="../../PropertiesPlus/v23_0/PropertiesPlus_Web.js"></script>
+    <script type="text/javascript" src="ManageAttributes_Web.js"></script>
+    <script type="text/javascript">
+        FormItInterface.Initialize(function () {
+
+            // initialize the UI
+            // this must be called from here, to ensure the HTML page is loaded
+            // before scripts try to access the window document
+            ManageAttributes.initializeUI();
+            ManageAttributes.updateUI();
+
+            FormItInterface.SubscribeMessage("FormIt.Message.kSelectionsChanged", function(msg)
+            {
+                // when the FormIt selection changes, automatically update the plugin UI
+                ManageAttributes.updateUI();
+            });
+
+            // on new sketch, update the UI to capture units and photo objects
+            FormItInterface.SubscribeMessage("FormIt.Message.kNewModelRequested", function(msg)
+            {
+                ManageAttributes.updateUI();
+            });
+
+            // on open file, update the UI to capture units and photo objects
+            FormItInterface.SubscribeMessage("FormIt.Message.kLoadComplete", function(msg)
+            {
+                ManageAttributes.updateUI();
+            });
+
+        }); // DOMContentLoaded
+    </script>
+</head>
+<body> 
+</body>
+</html>
