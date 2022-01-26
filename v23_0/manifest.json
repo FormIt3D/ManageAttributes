@@ -5,7 +5,7 @@
     "Scripts": [ 
         "PLUGINLOCATION/ManageAttributes_Client.js",
         "https://formit3d.github.io/SharedPluginUtilities/FormItPluginUtils.js",
-        "PLUGINLOCATION/../../PropertiesPlus/v23_0/PropertiesPlus_Client.js"
+        "https://formit3d.github.io/PropertiesPlus/v23_0/PropertiesPlus_Client.js"
      ],
     "Panel": "PLUGINLOCATION/index.html",
     "PanelIcon": "PLUGINLOCATION/img/manage_attributes@2x.png"
