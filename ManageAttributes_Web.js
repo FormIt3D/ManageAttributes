@@ -36,8 +36,8 @@ ManageAttributes.initializeUI = function()
     contentContainer.appendChild(currentHistoryAttributesHeader.element);
 
     // context properties info card
-    ManageAttributes.editingHistoryInfoCard = new FormIt.PluginUI.EditingContextInfoCard();
-    contentContainer.appendChild(ManageAttributes.editingHistoryInfoCard.element);
+    //ManageAttributes.editingHistoryInfoCard = new FormIt.PluginUI.EditingContextInfoCard();
+    //contentContainer.appendChild(ManageAttributes.editingHistoryInfoCard.element);
 
     // message when no group is being edited - attributes can't be added here
     ManageAttributes.notInEditingContextMessageCard = new FormIt.PluginUI.MessageInfoCard('Edit a group to manage its history attributes.');
@@ -88,23 +88,31 @@ ManageAttributes.initializeUI = function()
 // update the UI
 ManageAttributes.updateUI = function()
 {
-    // get selection info from Properties Plus
+    // get general selection info from Properties Plus
     window.FormItInterface.CallMethod("PropertiesPlus.getSelectionInfo", { }, function(result)
     {
         let currentSelectionInfo = JSON.parse(result);
 
         // update the cards that are always shown
-        ManageAttributes.editingHistoryInfoCard.update(currentSelectionInfo);
+        //ManageAttributes.editingHistoryInfoCard.update(currentSelectionInfo);
         ManageAttributes.selectionCountInfoCard.update(currentSelectionInfo);
 
+
+    });
+
+    // get attribute info from Properties Plus
+    window.FormItInterface.CallMethod("PropertiesPlus.getAttributeInfo", { }, function(result)
+    {
+        let attributeInfo = JSON.parse(result);
+
         // update the lists of existing attributes
-        ManageAttributes.existingAttributesOnSelectionCard.update(currentSelectionInfo.aSelectedObjectStringAttributes);
-        ManageAttributes.existingAttributesOnHistoryCard.update(currentSelectionInfo.aEditingHistoryStringAttributes);
+        ManageAttributes.existingAttributesOnSelectionCard.update(attributeInfo.aSelectedObjectStringAttributes);
+        ManageAttributes.existingAttributesOnHistoryCard.update(attributeInfo.aSelectedObjectHistoryStringAttributes);
 
         // manage card visibility for the editing history section
 
         // history attributes shouldn't be applied to the Main History (0)
-        if (currentSelectionInfo.nEditingHistoryID == 0)
+        if (attributeInfo.nEditingHistoryID == 0)
         {
             ManageAttributes.notInEditingContextMessageCard.show();
             ManageAttributes.existingAttributesOnHistoryCard.hide();
@@ -120,7 +128,7 @@ ManageAttributes.updateUI = function()
         // manage card visibility for the selected object section
 
         // attributes can only be managed on a single item at a time
-        if (currentSelectionInfo.nSelectedTotalCount == 1)
+        if (attributeInfo.nSelectedTotalCount == 1)
         {
             ManageAttributes.incompatibleSelectionMessageCard.hide();
             ManageAttributes.existingAttributesOnSelectionCard.show();

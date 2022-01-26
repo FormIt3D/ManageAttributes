@@ -7,8 +7,8 @@ ManageAttributes.setStringAttributeOnObjectFromInput = function(args) {
 
     var sAttributeKey = args.sAttributeKey;
     var sAttributeValue = args.sAttributeValue;
-    var currentSelectionInfo = args.currentSelectionInfo;
+    var attributeInfo = args.attributeInfo;
 
-    WSM.Utils.SetOrCreateStringAttributeForObject(currentSelectionInfo.nEditingHistoryID,
-        currentSelectionInfo.aSelectedObjectIDs[0], sAttributeKey, sAttributeValue);
+    WSM.Utils.SetOrCreateStringAttributeForObject(attributeInfo.nEditingHistoryID,
+        attributeInfo.nSelectedObjectID, sAttributeKey, sAttributeValue);
 }
