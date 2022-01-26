@@ -32,7 +32,7 @@ ManageAttributes.initializeUI = function()
     /*** in editing history ***/
 
     // editing context section
-    let currentHistoryAttributesHeader = new FormIt.PluginUI.SubheaderModule('In Editing History');
+    let currentHistoryAttributesHeader = new FormIt.PluginUI.SubheaderModule('In History');
     contentContainer.appendChild(currentHistoryAttributesHeader.element);
 
     // context properties info card
@@ -59,7 +59,7 @@ ManageAttributes.initializeUI = function()
     /*** on selected object ***/
 
     // selected object section
-    let selectedObjectAttributesHeader = new FormIt.PluginUI.SubheaderModule('On Selected Object');
+    let selectedObjectAttributesHeader = new FormIt.PluginUI.SubheaderModule('On Object');
     contentContainer.appendChild(selectedObjectAttributesHeader.element);
 
     // selection count info card
