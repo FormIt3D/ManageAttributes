@@ -110,8 +110,8 @@ ManageAttributes.updateUI = function()
         let attributeInfo = JSON.parse(result);
 
         // update the lists of existing attributes
-        ManageAttributes.existingAttributesOnHistoryCard.update(attributeInfo.aEditingHistoryStringAttributes);
-        ManageAttributes.existingAttributesOnSelectionCard.update(attributeInfo.aSelectedObjectStringAttributes);
+        ManageAttributes.existingAttributesOnHistoryCard.update(attributeInfo.aEditingHistoryStringAttributeIDs, attributeInfo.aEditingHistoryStringAttributes);
+        ManageAttributes.existingAttributesOnSelectionCard.update(attributeInfo.aSelectedObjectStringAttributeIDs, attributeInfo.aSelectedObjectStringAttributes);
 
 
         // manage card visibility for the editing history section
