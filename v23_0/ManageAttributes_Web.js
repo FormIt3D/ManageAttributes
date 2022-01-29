@@ -113,7 +113,6 @@ ManageAttributes.updateUI = function()
         ManageAttributes.existingAttributesOnHistoryCard.update(attributeInfo.aEditingHistoryStringAttributeIDs, attributeInfo.aEditingHistoryStringAttributes);
         ManageAttributes.existingAttributesOnSelectionCard.update(attributeInfo.aSelectedObjectStringAttributeIDs, attributeInfo.aSelectedObjectStringAttributes);
 
-
         // manage card visibility for the editing history section
 
         // history attributes shouldn't be applied to the Main History (0)
