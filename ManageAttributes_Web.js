@@ -26,7 +26,7 @@ ManageAttributes.initializeUI = function()
     window.document.body.appendChild(contentContainer);
 
     // create the overall header
-    let headerContainer = new FormIt.PluginUI.HeaderModule('Manage Attributes', 'View, modify, and add string attributes to the current history or the selected object.', 'headerContainer');
+    let headerContainer = new FormIt.PluginUI.HeaderModule('Manage Attributes', 'View, delete, and add string attributes to the current history or the selected object.', 'headerContainer');
     contentContainer.appendChild(headerContainer.element);
 
     /*** in editing history ***/
@@ -45,7 +45,7 @@ ManageAttributes.initializeUI = function()
     ManageAttributes.notInEditingContextMessageCard.hide();
 
     // existing attributes on this history
-    ManageAttributes.existingAttributesOnHistoryCard = new FormIt.PluginUI.StringAttributeListViewOnly('History Attributes', false, 200);
+    ManageAttributes.existingAttributesOnHistoryCard = new FormIt.PluginUI.StringAttributeListWithDelete('History Attributes', false, 200);
     contentContainer.appendChild(ManageAttributes.existingAttributesOnHistoryCard.element);
 
     // create new attributes on this history
@@ -74,7 +74,7 @@ ManageAttributes.initializeUI = function()
     ManageAttributes.incompatibleSelectionMessageCard.hide();
 
     // existing attributes on this object
-    ManageAttributes.existingAttributesOnSelectionCard = new FormIt.PluginUI.StringAttributeListViewOnly('Object Attributes', true, 200);
+    ManageAttributes.existingAttributesOnSelectionCard = new FormIt.PluginUI.StringAttributeListWithDelete('Object Attributes', true, 200);
     contentContainer.appendChild(ManageAttributes.existingAttributesOnSelectionCard.element);
 
     // create new attributes on this object

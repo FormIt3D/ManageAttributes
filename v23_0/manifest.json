@@ -1,6 +1,6 @@
 {
     "PluginName": "Manage Attributes",
-    "PluginDescription": "View, edit, and create string attributes attached to the editing history and selected object.",
+    "PluginDescription": "View, delete, and add string attributes to the selected object or editing history.",
     "PluginType": "Panel",
     "Scripts": [ 
         "PLUGINLOCATION/ManageAttributes_Client.js",

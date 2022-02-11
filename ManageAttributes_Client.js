@@ -21,3 +21,11 @@ ManageAttributes.setStringAttributeOnObjectFromInput = function(args) {
     WSM.Utils.SetOrCreateStringAttributeForObject(attributeInfo.nEditingHistoryID,
         attributeInfo.nSelectedObjectID, sAttributeKey, sAttributeValue);
 }
+
+ManageAttributes.deleteStringAttribute = function(args)
+{
+    var nStringAttributeID = args.nStringAttributeID;
+    var nHistoryID = FormIt.GroupEdit.GetEditingHistoryID();
+
+    WSM.APIDeleteObject(nHistoryID, nStringAttributeID);
+}
