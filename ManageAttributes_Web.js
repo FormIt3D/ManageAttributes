@@ -26,7 +26,7 @@ ManageAttributes.initializeUI = function()
     window.document.body.appendChild(contentContainer);
 
     // create the overall header
-    let headerContainer = new FormIt.PluginUI.HeaderModule('Manage Attributes', 'View, delete, and add string attributes to the current history or the selected object.', 'headerContainer');
+    let headerContainer = new FormIt.PluginUI.HeaderModule('Manage Attributes', 'View, delete, and add string attributes to the selected object or editing history.', 'headerContainer');
     contentContainer.appendChild(headerContainer.element);
 
     /*** in editing history ***/
