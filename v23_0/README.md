@@ -1,2 +1,3 @@
 # Manage Attributes
-View, edit, and create string attributes attached to the editing history and selected object.
+
+![Main Preview](https://formit3d.github.io/ManageAttributes/v23_0/preview.png)
